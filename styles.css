@@ -1,216 +1,260 @@
-body {
-    margin: 0;
-    min-height: 100vh;
-    min-height: 100dvh; 
-    background: linear-gradient(135deg, #c6e321, #09aa37);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'TharuDigitalSiyapatha';
-    overflow-x: hidden;
-    overflow-y: hidden;
-  }
-
-  .card-logo {
-    width: 100px;
-    margin-bottom: 5px;
+:root {
+  --z-bg: 0;
+  --z-decor: 1;
+  --z-anim: 5;
+  --z-content: 10;
+  --z-top: 20;
 }
 
-  html, body {
-    height: 100%;
-    overflow: hidden;
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'TharuDigitalSiyapatha', sans-serif;
+}
+
+body {
+  min-height: 100dvh;
+  background: linear-gradient(135deg, #c6e321, #09aa37);
+  background-size: 200% 200%;
+  animation: bgMove 10s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+
+.card-logo {
+  width: clamp(150px, 25vw, 250px);
+  margin-bottom: 2px; 
+  position: relative;
+  z-index: var(--z-content);
+  top: 10%;
+}
+
+.title {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: bold;
+  animation: titlePop 1.5s ease-out;
+  margin-top: 0; 
+}
+
+.subtitle {
+  margin-top: 8px; 
+  font-size: clamp(14px, 3vw, 20px);
+  animation: subtitleFade 2.5s ease-out;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.content {
+  position: relative;
+  z-index: var(--z-content);
+  text-align: center;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card {
+  text-align: center;
+  color: black;
+  position: relative;
+  z-index: var(--z-content);
+}
+
+
+@keyframes titlePop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
   }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes subtitleFade {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(1.08);
+  }
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);  
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh); 
+    opacity: 0;
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(-50%); }
+  50% { transform: translateY(-60%); }
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
 .awrudu-girl {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 35vh;
-    max-height: 300px;
-  } 
-  
-  .content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    color: black;
-    top: 40%;
-    transform: translateY(-50%);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  max-height: 30vh;
+  width: auto;
+  z-index: var(--z-decor);
+}
+
+.erabadu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30vh;   
+  width: auto;
+  z-index: var(--z-decor);
+}
+
+.koha {
+  position: absolute;
+  top: 20%;
+  right: 0;
+  height: 10vh;
+  animation: bounce 2s infinite;
+  z-index: var(--z-anim);
+  will-change: transform;
+}
+
+.sweets {
+  position: fixed;
+  bottom: -60px;
+  pointer-events: none;
+  z-index: var(--z-bg);
+  animation: floatUp linear forwards;
+  will-change: transform, opacity;
+}
+
+.petals {
+  position: fixed;
+  width: 30px;
+  pointer-events: none;
+  z-index: var(--z-bg);
+  animation: fall 4s linear forwards;
+  will-change: transform, opacity;
+}
+
+
+.bottom-left-text {
+  position: absolute;
+  bottom: clamp(60px, 10vh, 120px); 
+  left: clamp(10px, 3vw, 20px);
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "tharu_digital_malee";
+  z-index: var(--z-top);
+  animation: fadeInText 2s ease-out;
+}
+
+#bottom-line {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: var(--z-anim);
+}
+
+.bottom-img {
+  width: clamp(50px, 10vw, 80px);
+  opacity: 0;
+  animation: fadeInOut 2.5s ease-in-out forwards;
+}
+
+
+@media (max-width: 768px) {
+  .sweets,
+  .petals {
+    animation-duration: 6s;
+    opacity: 0.7;
   }
-  
-  
-  .sweets {
-    position: fixed;
-    bottom: -60px;
-    pointer-events: none;
-    z-index: 0;
-    animation: floatUp linear forwards;
+
+  .koha {
+    height: 8vh;
   }
-  
-  @keyframes floatUp {
-    0% {
-      transform: translateY(0);  
-      opacity: 0;
-    }
-    20% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-110vh); 
-      opacity: 0;
-    }
-  }
-  
-  .card {
-    text-align: center;
-    color: black;
-    position: relative;
-    z-index: 10;
-  }
-  
+
   .title {
-    font-size: 42px;
-    font-weight: bold;
-    animation: titlePop 1.5s ease-out;
+    font-size: clamp(24px, 7vw, 36px);
   }
-  
 
   .subtitle {
-    margin-top: 15px;
-    font-size: 20px;
-    animation: subtitleFade 2.5s ease-out;
-    opacity: 0;
-    animation-fill-mode: forwards;
+    font-size: clamp(12px, 4vw, 18px);
   }
-  
-
-  @keyframes titlePop {
-    0% {
-      transform: scale(0.5);
-      opacity: 0;
-    }
-    60% {
-      transform: scale(1.1);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  
-  @keyframes subtitleFade {
-    0% {
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  .erabadu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 30vh;   
-    width: auto;
-    z-index: 1;
-  }
-  
-  
-  .koha {
-    position: absolute;
-    top: 20%;
-    right: 0;
-    height: 10vh;
-    animation: bounce 2s infinite;
-    z-index: 2;
-  }
-  
-
-  .petals {
-    position: fixed;
-    width: 30px;
-    pointer-events: none;
-    z-index: 0;
-    animation: fall 4s linear forwards;
-  }
-  
- 
-  @keyframes fall {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 0;
-    }
-    20% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(110vh) rotate(360deg);
-      opacity: 0;
-    }
-  }
-  
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(-50%); }
-    50% { transform: translateY(-60%); }
-  }
-
-
-  .bottom-left-text {
-    position: absolute;
-    bottom: 20%;
-    left: 15px;
-    color: black;
-    font-size: 18px;
-    font-weight: 500;
-    z-index: 20;
-    font-family: "tharu_digital_malee";
-  
-    animation: fadeInText 2s ease-out;
-  }
-  
-  @keyframes fadeInText {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  #bottom-line {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 5;
-  }
-  
-  .bottom-img {
-    width: 80px;
-    opacity: 0;
-    animation: fadeInOut 2.5s ease-in-out forwards;
-  }
-  
-  @keyframes fadeInOut {
-    0% {
-      opacity: 0;
-      transform: translateY(10px) scale(0.9);
-    }
-    25% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-10px) scale(1.05);
-    }
-  }
+}
